@@ -12,6 +12,10 @@ class CreateBlog(BaseModel):
         if 'title' in values:
             values['slug'] = values.get('title').replace(" ", "-").lower()
         return values
+    
+
+class UpdateBlog(CreateBlog):
+    pass
         
 class ShowBlog(BaseModel):
     title: str
