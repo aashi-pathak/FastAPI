@@ -43,7 +43,7 @@ def login(request: Request, email: str = Form(...), password: str=Form(...), db:
     user=authenticate_user(email=email, password=password, db=db)
     if not user:
         errors.append("Incorrect email or password")
-        return templates.TemplateResponse("auth/login.html", {"request": request, "errors": errors})
+        return templates.TemplateResponse("auth/login.html", {"request": request, "errors": errors, "email": email, "password": password})
     access_token = create_access_token(data={"sub": email})
     response = responses.RedirectResponse("/?alert=Successfully Loggedin", status_code=status.HTTP_302_FOUND)
     response.set_cookie(key=access_token, value=f"Bearer {access_token}")
